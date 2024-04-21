@@ -1,0 +1,52 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %} Listado de Reservas {% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Botón de Crear Reserva -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Reservas</h2>
+            <!-- Botón de Crear Reserva alineado a la derecha -->
+            <a href="{% url 'yyy' %}" class="btn btn-success">Crear Reserva</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre de Usuario</th>
+                    <th scope="col">Sala</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora de Inicio</th>
+                    <th scope="col">Hora de Fin</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if todas_las_reservas %}
+                {% for reserva in todas_las_reservas %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ reserva.nombre_de_usuario }}</td>
+                    <td>{{ reserva.sala }}</td>
+                    <td>{{ reserva.fecha }}</td>
+                    <td>{{ reserva.hora_inicio }}</td>
+                    <td>{{ reserva.hora_fin }}</td>
+                    <td>
+                        <a href="/bookings/detail/{{ reserva.id }}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="/bookings/detail/{{ reserva.id }}" class="btn btn-primary btn-sm">Eliminar</a>
+                        <a href="/bookings/detail/{{ reserva.id }}" class="btn btn-primary btn-sm">Ver</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="7">No hay Reservas disponibles.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

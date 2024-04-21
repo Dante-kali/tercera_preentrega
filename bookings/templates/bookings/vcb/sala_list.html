@@ -1,0 +1,49 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %} Listado de Salas {% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Salas</h2>
+            <a href="{% url 'vbc_sala_create' %}" class="btn btn-success">Crear Sala</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Disponible</th>
+                    <th scope="col">Capacidad</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% if ADRIANDARGELOS %}
+                {% for sala in ADRIANDARGELOS %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ sala.nombre }}</td>
+                    <td>{{ sala.capacidad }}</td>
+                    <td>{{ sala.descripcion }}</td>
+                    <td>{{ sala.disponible }}</td>
+                    <td>
+                        <a href="{% url 'vbc_sala_update' sala.id %}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{% url 'vbc_sala_delete' sala.id %}" class="btn btn-primary btn-sm">Eliminar</a>
+                        <a href="{% url 'vbc_sala_detail' sala.id %}" class="btn btn-primary btn-sm">Ver</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="7">No hay Salas.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

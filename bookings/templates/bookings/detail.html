@@ -1,0 +1,34 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}Detalle de la Reserva{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        Detalle de la Reserva
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ reserva.nombre_de_usuario }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Sala: {{ reserva.sala }}</h6>
+                        <p class="card-text">Fecha: {{ reserva.fecha | date:"d/m/Y" }}</p>
+                        <p class="card-text">Hora de inicio: {{ reserva.hora_inicio | date:"H:i" }}</p>
+                        <p class="card-text">Hora de fin: {{ reserva.hora_fin | date:"H:i" }}</p>
+                        <p class="card-text">Descripción: {{ reserva.descripcion }}</p>
+                    </div>
+                    {% comment %}
+                    <div class="card-footer text-muted">
+                        <a href="{% url 'edit_reserva' reserva.id %}" class="btn btn-primary">Editar Reserva</a>
+                        <a href="{% url 'delete_reserva' reserva.id %}" class="btn btn-danger">Eliminar Reserva</a>
+                        <a href="{% url 'todas_las_reservas' %}" class="btn btn-secondary">Volver al listado</a>
+                    </div>
+                    {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
